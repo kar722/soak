@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Fit.ar</title>
+  <link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<html>
+<body>
+
+<h1>Fit.ar</h1>
+
+<form action="/action_page.php">
+  <label for="img">Upload a 2D Image (PNG or JPG):</label>
+  <input type="file" id="img" name="img" accept="image/*">
+</form>
+<style>
+#myProgress {
+  width: 50%;
+  background-color: gray;
+}
+
+#myBar {
+  width: 1%;
+  height: 30px;
+  background-color: #ddd000;
+}
+</style>
+
+<br>
+<button onclick="move()">Submit</button>   
+<br>
+  
+<p id="process"></p>  
+  
+<div id="myProgress">
+  <div id="myBar"></div>
+</div>
+  
+<button onclick="showvid()" id="resultbut">View Result</button> 
+  
+<div id="result">
+  <video width="1080" height="720" controls>
+    <source src="download.mp4" type="video/mp4">
+  </video>
+</div>
+
+<script>
+document.getElementById("myBar").style.display = "none"
+document.getElementById("resultbut").style.display = "none"
+document.getElementById("result").style.display = "none"
+var i = 0;
+function move() {
+  document.getElementById("process").innerHTML = "Processing 3d Model"
+  var x = document.getElementById("myBar");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+  if (i == 0) {
+    i = 1;
+    var elem = document.getElementById("myBar");
+    var width = 1;
+    var id = setInterval(frame, 10);
+    function frame() {
+      if (width >= 100) {
+        clearInterval(id);
+        i = 0;
+       document.getElementById("process").innerHTML = "Processed 3d Model"
+      document.getElementById("resultbut").style.display = "block"
+      } else {
+        width++;
+        elem.style.width = width + "%";
+      }
+    }
+  }
+}
+
+function showvid() {
+	document.getElementById("result").style.display = "block"
+}
+
+</script>
+
+
+</body>
+</html>
+<!-- partial -->
+  
+</body>
+</html>
